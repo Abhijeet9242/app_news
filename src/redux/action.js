@@ -1,6 +1,7 @@
 import axios from "axios";
 import { GET_NEWS, GET_SELECTED_NEWS } from "./actionTypes";
 
+
 export const fetchNews = (cato, page) => (dispatch) => {
   let link =
     "https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=68ed4c9448ed4460a987bb80f109bb4e";
@@ -9,7 +10,7 @@ export const fetchNews = (cato, page) => (dispatch) => {
     cato = "health";
     link = `https://newsapi.org/v2/top-headlines?country=in&category=${cato}&page=${page}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`;
     axios
-      .get(link,{ crossdomain: true })
+      .get(`https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/top-headlines?country=in&category=${cato}&page=${page}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`,{headers: {'Access-Control-Allow-Origin': '*'}})
       .then((res) => {
         dispatch(getNews(res.data.articles));
       })
@@ -20,7 +21,7 @@ export const fetchNews = (cato, page) => (dispatch) => {
     console.log(page + "page");
     link = `https://newsapi.org/v2/top-headlines?country=in&category=${cato}&page=${page}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`;
     axios
-      .get(link,{ crossdomain: true })
+      .get(`https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/top-headlines?country=in&category=${cato}&page=${page}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`)
       .then((res) => {
         // console.log(res)
         dispatch(getNews(res.data.articles));
@@ -44,3 +45,6 @@ export const getSelectedNews = (payload) => {
     payload: payload,
   };
 };
+
+
+// link = `https://newsapi.org/v2/top-headlines?country=in&category=${cato}&page=${page}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`;
