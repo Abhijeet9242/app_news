@@ -9,7 +9,7 @@ export const fetchNews = (cato, page) => (dispatch) => {
     cato = "health";
     link = `https://newsapi.org/v2/top-headlines?country=in&category=${cato}&page=${page}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`;
     axios
-      .get(link)
+      .get(link,{ crossdomain: true })
       .then((res) => {
         dispatch(getNews(res.data.articles));
       })
@@ -20,7 +20,7 @@ export const fetchNews = (cato, page) => (dispatch) => {
     console.log(page + "page");
     link = `https://newsapi.org/v2/top-headlines?country=in&category=${cato}&page=${page}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`;
     axios
-      .get(link)
+      .get(link,{ crossdomain: true })
       .then((res) => {
         // console.log(res)
         dispatch(getNews(res.data.articles));
